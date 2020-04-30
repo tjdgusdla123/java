@@ -2,7 +2,7 @@ package test0430;
 
 public class ArrayClass0430 {
       private int  Num;
-      praivte String Name;
+      private String Name;
       private String Phone;
       private String Area;
 	public ArrayClass0430() {
