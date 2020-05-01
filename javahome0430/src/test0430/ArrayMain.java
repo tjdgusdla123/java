@@ -8,20 +8,20 @@ public class ArrayMain {
 		ArrayClass0430[] data = new ArrayClass0430[3];
 		data[0] = new ArrayClass0430();
 		data[0].setNum(1);
-		data[0].setName("ÀÓ¼ºÇö");
-		data[0].setArea("ÀºÆò±¸");
+		data[0].setName("ì„ì„±í˜„");
+		data[0].setArea("ì€í‰êµ¬");
 		data[0].setPhone("013-1221-3213");
 		
 		data[1] = new ArrayClass0430();
 		data[1].setNum(2);
-		data[1].setName("±èµ¿ÈÆ");
-		data[1].setArea("¼­´ë¹®±¸");
+		data[1].setName("ê¹€ë™í›ˆ");
+		data[1].setArea("ì„œëŒ€ë¬¸êµ¬");
 		data[1].setPhone("012-1123-1148");
 		
 		data[2] = new ArrayClass0430();
 		data[2].setNum(3);
-		data[2].setName("°­ÁØÈñ");
-		data[2].setArea("¼­´ë¹®±¸");
+		data[2].setName("ê°•ì¤€í¬");
+		data[2].setArea("ì„œëŒ€ë¬¸êµ¬");
 		data[2].setPhone("011-3213-4214");
 
 		
