@@ -34,9 +34,20 @@ public class ImageDownload {
 				//읽은 데이터가 없으면 종료
 				int len =bis.read(b);
 				if(len<=0) {
-					
+					//b배열에서 읽은 개수만큼만 기록
+					break;
 				}
+				ps.write(b,0,len);
 			}
+			//버퍼를 이용하기 때문에 모아서 출력을 합니다.
+			//종료할 때는 혹시 버퍼에 내용이 남아있을 수 있기
+			//때문에 flysh를 호출해서 남은 내용을 출력
+			ps.flush();
+			//정리 작업
+			ps.close();
+			bis.close();
+			con.disconnect();
+			
 			
 			
 		} catch (Exception e) {
