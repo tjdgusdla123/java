@@ -2,6 +2,7 @@ package javaapp0504;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.net.HttpURLConnection;
@@ -10,6 +11,15 @@ import java.net.URL;
 public class ImageDownload {
 
 	public static void main(String[] args) {
+		//파일의 존재 여부 확인
+		File f =new File("./2.jpg");
+		if(f.exists()==true) {
+			System.out.println("파일이 이미 존재합니다.");
+		    System.exit(0);
+		}else {
+			System.out.println("파일이 존재하지 않아서 다운로드를 받습니다.");
+		}
+		
 		try {
 			// 다운로드 받을 URL을생성
 			URL url = new URL(

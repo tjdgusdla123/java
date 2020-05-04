@@ -11,7 +11,7 @@ public class Algorithm <T> {
 }
 
 //Algorithm 클래스의 인스턴스를 생성
-Algorithm <Integer> obj = new Algorithm<>();
+//Algorithm <Integer> obj = new Algorithm<>();
 
 
 
