@@ -11,7 +11,7 @@ public class TestBreakContinue1 {
 				//3의 배수가 되면 아래로 내려가지 않고
 				//다음 반복을 수행
 				//1,2, 4,5, 7,8, 10
-				continue;
+				continue;`
 			}
 			System.out.println(i);
 		}
