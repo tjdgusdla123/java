@@ -37,6 +37,12 @@ public class practise0511 {
 		boolean isEVen;
 		isEVen =(num2 %2)==0?true:false;
 		System.out.println(isEVen);
+		
+	
+			
+			
+		}
+		
 	}
 
-}
+
