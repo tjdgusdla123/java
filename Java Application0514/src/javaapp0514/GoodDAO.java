@@ -1,11 +1,13 @@
-package javaapp0513;
+package javaapp0514;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 //데이터베이스 연동 메소드를 소유한 클래스
 public class GoodDAO {
@@ -56,10 +58,10 @@ public class GoodDAO {
 	// select * from goods;
 	// List를 리턴할 때는 인스턴스를 만들고 데이터를 추가한 후 리턴
 	// 여러 개의 데이터를 가져올 때는 데이터가 없는 경우 size가 0
-	public List<Good> allGood() {
+	public List<Map<String,Object>> allGood() {
 		// 리턴할 데이터 생성
 		// 여러 개 일 때는 생성자를 호출해서 인스턴스를 생성
-		List<Good> list = new ArrayList<Good>();
+		List<Map<String, Object>> list = new ArrayList<Map<String,Object>>();
 
 		// 데이터베이스 연결
 		connect();
@@ -71,18 +73,25 @@ public class GoodDAO {
 			// 데이터가 여러 개
 			while (rs.next()) {
 				// 행 단위 작업 수행
-				Good imsi = new Good();
+				//Good imsi = new Good();
+				Map<String, Object>map= new HashMap<>();
+				
 				// code 열의 값을 문자열로 읽어서 imsi에 저장
 				// MyBatis 나 Hibernate를 사용할 때 변수이름만 설정하면
 				// 이 작업은 할 필요가 없음
-				imsi.setCode(rs.getString("code"));
-				imsi.setName(rs.getString("name"));
-				imsi.setManufacture(rs.getString("manufacture"));
-				imsi.setPrice(rs.getInt("price"));
-				imsi.setReceivedate(rs.getDate("receivedate"));
+				//imsi.setCode(rs.getString("code"));
+				//imsi.setName(rs.getString("name"));
+				//imsi.setManufacture(rs.getString("manufacture"));
+				//imsi.setPrice(rs.getInt("price"));
+				//imsi.setReceivedate(rs.getDate("receivedate"));
 
+				map.put("코드",rs.getString("code"));
+				map.put("이름",rs.getString("name"));
+				map.put("원산지",rs.getString("manufacture"));
+				map.put("가격",rs.getInt("price"));
+				map.put("입고일",rs.getDate("receivedate"));
 				// list에 삽입
-				list.add(imsi);
+				list.add(map);
 			}
 		} catch (Exception e) {
 			System.err.println("SQL 실행 에러");
@@ -190,7 +199,7 @@ public class GoodDAO {
 		int result = -1;
 		connect();
 		try {
-			pstmt = con.prepareStatement("delete from goods " + "where code = ?");
+			pstmt = con.prepareStatement("delete from goods " + "where  trim(code) = ?");
 			pstmt.setString(1, code);
 			result = pstmt.executeUpdate();
 		} catch (Exception e) {

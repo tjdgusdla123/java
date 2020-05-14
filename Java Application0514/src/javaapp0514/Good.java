@@ -1,4 +1,4 @@
-package javaapp0513;
+package javaapp0514;
 import java.sql.Date;
 public class Good {
 	private String code;

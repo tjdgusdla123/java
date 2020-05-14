@@ -1,8 +1,10 @@
-package javaapp0513;
+package javaapp0514;
 
 import java.sql.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
+import java.util.Set;
 
 import javax.swing.JOptionPane;
 
@@ -40,10 +42,15 @@ public class GoodMain {
 			switch (menu) {
 			case "1":
 				// 전체 데이터 가져오는 메소드 호출
-				list = dao.allGood();
+				List<Map<String, Object>>	maplist = dao.allGood();
 				// list 순회하면서 출력하기
-				for (Good g : list) {
-					System.out.println(g.getCode() + "\t" + g.getName() + "\t" + g.getPrice() + "원");
+				for (Map g : maplist) {
+					//System.out.println(g.get("code") + "\t" + g.get("name") + "\t" + g.get("price") + "원");
+					Set<String> keyset= g.keySet();
+					for(String key : keyset) {
+						System.out.print(g.get(key)+"\t");
+					}
+					System.out.println();
 				}
 				break;
 			case "2":
