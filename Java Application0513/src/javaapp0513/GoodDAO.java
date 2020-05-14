@@ -54,10 +54,10 @@ public class GoodDAO {
 	// List를 리턴할 때는 인스턴스를 만들고 데이터를 추가한 후 리턴
 	// 여러 개의 데이터를 가져올 때는 데이터가 없는 경우 size가0
 	public List<Good> allGood() {
-		//리턴할 데이터 생성
-		//여러 개 일 때는 생성자를 호출해서 인스턴스를 생성
+		// 리턴할 데이터 생성
+		// 여러 개 일 때는 생성자를 호출해서 인스턴스를 생성
 		List<Good> list = new ArrayList<Good>();
-           
+
 		// 데이터베이스 연결
 		connect();
 		try {
@@ -91,32 +91,32 @@ public class GoodDAO {
 	// 하나의 행만 리턴하는 경우에는 데이터가 없으면 null을 리턴
 	public Good getGood(String code) {
 		Good good = null;
-		
-		//데이터베이스 연결
+
+		// 데이터베이스 연결
 		connect();
-		
-		//데이터베이스 작업
+
+		// 데이터베이스 작업
 		try {
-			//SQL 실행 객체 생성
-			pstmt =con.prepareStatement( "select * from goods where trim(code) =? ");
+			// SQL 실행 객체 생성
+			pstmt = con.prepareStatement("select * from goods where trim(code) =? ");
 			pstmt.setString(1, code);
-			//SQL 실행
+			// SQL 실행
 			ResultSet rs = pstmt.executeQuery();
-			//데이터가 2개 이상 나올 수 없으므로 if로 처리
-			if(rs.next()) {
-			good =new Good();
-			good.setCode(rs.getNString("code"));
-			good.setName(rs.getNString("name"));
-			good.setManufacture(rs.getNString("manufacture"));
-			good.setPrice(rs.getInt("price"));
-			good.setReceivedate(rs.getDate("receivedate"));
-		}
-		}catch(Exception e) {
+			// 데이터가 2개 이상 나올 수 없으므로 if로 처리
+			if (rs.next()) {
+				good = new Good();
+				good.setCode(rs.getNString("code"));
+				good.setName(rs.getNString("name"));
+				good.setManufacture(rs.getNString("manufacture"));
+				good.setPrice(rs.getInt("price"));
+				good.setReceivedate(rs.getDate("receivedate"));
+			}
+		} catch (Exception e) {
 			System.out.println("상세보기 에러");
 			System.out.println(e.getMessage());
 		}
-		
-		//데이터베이스 연결 해제
+
+		// 데이터베이스 연결 해제
 		close();
 		return good;
 	}
@@ -126,6 +126,27 @@ public class GoodDAO {
 	// 양수가 리턴되면 작업을 수행한 것임
 	public int intsrtGood(Good good) {
 		int result = -1;
+		// 데이터베이스 연결
+		connect();
+		try {
+			pstmt = con
+					.prepareStatement("insert into goods (code,name,manufacture,price,receivedate) values(?,?,?,?,?) ");
+			pstmt.setString(1, good.getCode());
+			pstmt.setString(2, good.getName());
+			pstmt.setString(3, good.getManufacture());
+			pstmt.setInt(4, good.getPrice());
+			pstmt.setDate(5, good.getReceivedate());
+
+			// 실행
+			result = pstmt.executeUpdate();
+
+			pstmt.close();
+			con.close();
+		} catch (Exception e) {
+			System.out.println("삽입 에러");
+			System.out.println(e.getMessage());
+		}
+		close();
 		return result;
 	}
 

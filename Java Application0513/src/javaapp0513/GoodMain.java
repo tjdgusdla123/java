@@ -1,5 +1,6 @@
 package javaapp0513;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.Scanner;
 
@@ -24,10 +25,16 @@ public class GoodMain {
 		mainloop: while (true) {
 			System.out.println("메뉴 입력(1.전체 데이터 보기 2.코드로 데이터 조회하기 3.데이터 삽입 4.데이터 수정 5.데이터 삭제 6.종료)");
 			String menu = sc.nextLine();
+			// switch 구문 내에서 사용할 변수
+			List<Good> list = null;
+			Good good = null;
+			int result = -1;
+
+			String code = null;
 			switch (menu) {
 			case "1":
 				// 전체데이터 가져오는 메소드 호출
-				List<Good> list = dao.allGood();
+				list = dao.allGood();
 				// list 순회하면서 출력하기
 				for (Good g : list) {
 					System.out.println(g.getCode() + ":" + g.getName() + ":" + g.getPrice() + "원");
@@ -37,17 +44,53 @@ public class GoodMain {
 			case "2":
 				// 코드1개 입력받기
 				System.out.println("조회할 코드 입력");
-				String code = sc.nextLine();
+				code = sc.nextLine();
 				// Dao 메소드 호출
-				Good good1 = dao.getGood(code);
-				if (good1 == null) {
+				good = dao.getGood(code);
+				if (good == null) {
 					System.out.println("코드에 해당하는 데이터 없음");
 				} else {
-					System.out.println(good1);
+					System.out.println(good);
 				}
 				break;
 			case "3":
-				System.out.println("데이터 삽입");
+				// 삽입할 코드를입력
+				System.out.println("삽입할 코드를 입력");
+				code = sc.nextLine();
+				// 코드에 해당하는 데이터를 가져오기
+				good = dao.getGood(code);
+				// 코드에 해당하는 데이터가 없으면
+				if (good == null) {
+					// 나머지 데이터 입력
+					System.out.print("이름 입력:");
+					String name = sc.nextLine();
+					System.out.print("원산지 입력:");
+					String Manufacture = sc.nextLine();
+					System.out.print("가격 입력:");
+					String temp = sc.nextLine();
+					int price = Integer.parseInt(temp);
+					// 현재 날짜 생성
+					Date receivedate = new Date(System.currentTimeMillis());
+					// 삽입할 데이터 생성
+					good = new Good();
+					good.setCode(code);
+					good.setName(name);
+					good.setManufacture(Manufacture);
+					good.setPrice(price);
+					good.setReceivedate(receivedate);
+
+					// sql 실행
+					result = dao.intsrtGood(good);
+					if (result > 0) {
+						System.out.println("데이터 삽입 성공");
+					} else {
+						System.out.println("데이터 삽입 실패");
+					}
+				}
+				// 코드에 해당하는 데이터가 있으면
+				else {
+					System.out.println("이미 존재하는 코드");
+				}
 				break;
 			case "4":
 				System.out.println("데이터 수정");
