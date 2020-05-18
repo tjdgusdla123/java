@@ -14,6 +14,7 @@ public class CovidDAO {
 		// MySQL 드라이버 클래스 로드
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
+			System.out.println("드라이버 클래스 로드 성공");
 		} catch (Exception e) {
 			System.err.println("드라이버 클래스 로드 실패");
 			System.err.println(e.getMessage());
@@ -53,8 +54,9 @@ public class CovidDAO {
 	private void connect() {
 		try {
 			// 데이터베이스 연결
-			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/mysql", "root", "8989450a");
-			//System.out.println("데이터베이스 접속 성공");
+			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sample", 
+					"root", "8989450a");
+		System.out.println("데이터베이스 접속 성공");
 		} catch (Exception e) {
 			System.err.println("데이터베이스 연결 실패");
 			System.err.println(e.getMessage());
@@ -99,7 +101,7 @@ public class CovidDAO {
 				Covid covid = new Covid();
 				// 인스턴스의 내부 요소를 채우기
 				covid.setNum(rs.getInt("num"));
-				covid.setNation(rs.getString("nation"));
+				covid.setNotion(rs.getString("notion"));
 				covid.setConfirmcount(rs.getInt("confirmcount"));
 				// List에 추가
 				list.add(covid);
@@ -141,7 +143,7 @@ public class CovidDAO {
 				covid = new Covid();
 				covid.setNum(rs.getInt("num"));
 				covid.setRegion(rs.getString("region"));
-				covid.setNation(rs.getNString("nation"));
+				covid.setNotion(rs.getNString("notion"));
 				covid.setPop(rs.getInt("pop"));
 				covid.setConfirmcount(rs.getInt("Confirmcount"));
 				covid.setDeathcount(rs.getInt("Deathcount"));

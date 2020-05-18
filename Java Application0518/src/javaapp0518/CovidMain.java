@@ -41,7 +41,7 @@ public class CovidMain {
 				// 데이터 출력
 				System.out.printf("%5s%15s%10s\n", "번호", "국가", "사망자수");
 				for (Covid imsi : list) {
-					System.out.printf("%5d%15s%10d\n", imsi.getNum(), imsi.getNation(), imsi.getConfirmcount());
+					System.out.printf("%5d%15s%10d\n", imsi.getNum(), imsi.getNotion(), imsi.getConfirmcount());
 				}
 
 				break;

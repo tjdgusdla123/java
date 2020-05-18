@@ -4,7 +4,7 @@ public class Covid {
 
 	private int num;
 	private String region;
-	private String nation;
+	private String notion;
 	private int pop;
 	private int confirmcount;
 	private int deathcount;
@@ -25,12 +25,12 @@ public class Covid {
 		this.region = region;
 	}
 
-	public String getNation() {
-		return nation;
+	public String getNotion() {
+		return notion;
 	}
 
-	public void setNation(String notion) {
-		this.nation = notion;
+	public void setNotion(String notion) {
+		this.notion = notion;
 	}
 
 	public int getPop() {
@@ -59,7 +59,7 @@ public class Covid {
 
 	@Override
 	public String toString() {
-		return "Covid19 [num=" + num + ", region=" + region + ", nation=" + nation + ", pop=" + pop + ", confirmcount="
+		return "Covid19 [num=" + num + ", region=" + region + ", notion=" + notion + ", pop=" + pop + ", confirmcount="
 				+ confirmcount + ", deathcount=" + deathcount + "]";
 	}
 
