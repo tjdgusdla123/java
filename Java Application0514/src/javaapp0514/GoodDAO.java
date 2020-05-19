@@ -248,4 +248,18 @@ public class GoodDAO {
 		close();
 		return list;
 	}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
