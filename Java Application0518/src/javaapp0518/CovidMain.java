@@ -62,31 +62,33 @@ public class CovidMain {
 					System.out.println(imsi);
 				}
 				
+				int pageno =1;
 				while(true) {
-					//조회할 페이지 번호 입력받기
-					System.out.print(
-						"페이지 번호(1-" + pagesu + ") 종료는 0:");
-					temp = sc.nextLine();
-					try {
-						int pageno = Integer.parseInt(temp);
-						if(pageno == 0) {
-							break;
-						}else if(pageno >= 1 && pageno <= pagesu) {
-							//pageno 페이지의 데이터 가져와서 출력
-							list = dao.pageCovid(pageno, 2);
+					//아무키나 누르고 enter 치면 종료
+					//그냥 enter치면 다음 페이지의 데이터도 가져와서 출력하기
+					System.out.println("아무거나 누르면 종료");
+					System.out.print("enter만 누르면 다음페이지 데이터 가져오기");
+					temp=sc.nextLine();
+					if(temp.trim().length()==0) {
+						pageno=pageno+1;
+						if(pageno>pagesu) {
+							System.out.println("더이상 가져올 데이터 없음");
+						}else {
+							//pageno에 해당하는 데이터 가져오기
+							List<Covid>ccurrentDate=dao.pageCovid(pageno,2);
+							//위의 데이터를 list에 추가
+							list.addAll(ccurrentDate);
+							//출력
 							for(Covid imsi : list) {
 								System.out.println(imsi);
 							}
-						}else {
-							System.out.println("잘못된 페이지 번호");
 						}
-					}catch(Exception e) {
-						System.out.println(
-							"페이지 번호는 숫자로 입력하세요!!!");
+					}else {	
+						break;
 					}
 				}
-				
 				break;
+			
 			case "3":
 				// 조회할 번호를 입력받기
 				System.out.print("조회할 번호:");
