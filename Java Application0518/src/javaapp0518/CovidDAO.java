@@ -1,6 +1,12 @@
 package javaapp0518;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.PrintWriter;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -108,6 +114,35 @@ public class CovidDAO {
 			}
 
 			rs.close();
+			//현재 날짜를 포함한 파일 경로를 만들기
+			//java.sql.Date 인스턴스 생성
+			Date today = new Date(
+					System.currentTimeMillis());
+			//현재 디렉토리에 오늘날짜.log 문자열 생성
+			String filepath = 
+					"./" + today.toString() + ".log";
+			//try() 안에서 만들면 close를 호출하지 않아도 됩니다.
+			//true를 대입한 것은 없으면 만들지만 있으면 데이터를 뒤에 추가
+			try(PrintWriter pw = new PrintWriter(
+					new FileOutputStream(filepath, true))){
+				//현재 날짜 및 시간까지는 갖는 java.util.Date인스턴를 생성
+				java.util.Date date = new java.util.Date();
+				//필요한 내용을 기록
+				pw.print(date.toString() + "\t" + "전체보기" + 
+				"\n");
+				//버퍼에 내용이 남아있지 않도록 버퍼의 내용을 모두 출력
+				pw.flush();
+				Date curdate= new Date(System.currentTimeMillis());
+				String filename ="./"+curdate.toString()+".dat";
+				try(ObjectOutputStream oos =new ObjectOutputStream(new FileOutputStream(filename,true))){
+					Log log =new Log();
+					log.setDate(new java.util.Date());
+					log.setTask("전체보기");
+					oos.writeObject(log);
+					oos.flush();
+
+				}
+			}
 		} catch (Exception e) {
 			System.err.println("전체 데이터 가져오기 실패");
 			System.err.println(e.getMessage());
@@ -187,6 +222,16 @@ public class CovidDAO {
 	// 특별한 경우가 아니면 컬럼은 2개 이상
 	// select를 제외한 모든 SQL의 실행은 영향받은 행의 개수를 리턴
 	public int insertCovid(Covid covid) {
+		//serializable된 데이터 읽어오기
+		Date today1= new Date(System.currentTimeMillis());
+		String filename ="./"+today1.toString()+".dat";
+		try(ObjectInputStream oos=new ObjectInputStream(new FileInputStream(filename))){
+			Log log =(Log)oos.readObject();
+			System.out.println(log);
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+		}
+		
 		// 여기서 -1은 의미없는 값으로 삽입 실패를 의미하는 값
 		// 어떤 음수라도 가능 - 0은 조심
 		int result = -1;
@@ -216,6 +261,24 @@ public class CovidDAO {
 			// SQL 실행
 			result = pstmt.executeUpdate();
 
+			//현재 날짜를 포함한 파일 경로를 만들기
+			//java.sql.Date 인스턴스 생성
+			Date today = new Date(
+					System.currentTimeMillis());
+			//현재 디렉토리에 오늘날짜.log 문자열 생성
+			String filepath = 
+					"./" + today.toString() + ".log";
+			//try() 안에서 만들면 close를 호출하지 않아도 됩니다.
+			//true를 대입한 것은 없으면 만들지만 있으면 데이터를 뒤에 추가
+			try(PrintWriter pw = new PrintWriter(
+					new FileOutputStream(filepath, true))){
+				java.util.Date date = new java.util.Date();
+				
+				pw.print(date.toString() + "\t" + "삽입" + 
+				"\n");
+				pw.flush();
+			}
+			
 		} catch (Exception e) {
 			// 자신이 알아볼 수 있는 예외 메시지를 출력
 			System.out.println("데이터 삽입 실패");
