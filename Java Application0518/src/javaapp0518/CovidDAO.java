@@ -61,7 +61,7 @@ public class CovidDAO {
 			// 데이터베이스 연결
 			con = DriverManager.getConnection(
 					"jdbc:mysql://192.168.0.200:3306/sample" + "?useUnicode=true&characterEncoding=utf8", "root",
-					"*******");
+					"8989450a");
 			// System.out.println("데이터베이스 접속 성공");
 		} catch (Exception e) {
 			System.err.println("데이터베이스 연결 실패");
