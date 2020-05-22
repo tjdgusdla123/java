@@ -2,8 +2,8 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>Javaapplication0522</groupId>
-	<artifactId>Javaapplication0522</artifactId>
+	<groupId>DataParsingProject</groupId>
+	<artifactId>DataParsingProject</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<build>
 		<sourceDirectory>src</sourceDirectory>
@@ -18,17 +18,9 @@
 			</plugin>
 		</plugins>
 	</build>
+	<!-- https://mvnrepository.com/artifact/net.sf.supercsv/super-csv -->
 
-	<!-- 실제 사용할 라이브러리의 의존성을 설정 -->
 	<dependencies>
-		<!-- MySQL 사용을 위한 의존성 -->
-		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<version>8.0.15</version>
-		</dependency>
-
-		<!-- https://mvnrepository.com/artifact/net.sf.supercsv/super-csv -->
 		<dependency>
 			<groupId>net.sf.supercsv</groupId>
 			<artifactId>super-csv</artifactId>
@@ -38,6 +30,5 @@
 
 
 	</dependencies>
-
 
 </project>
