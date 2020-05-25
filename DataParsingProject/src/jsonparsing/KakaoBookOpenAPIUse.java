@@ -147,7 +147,7 @@ public class KakaoBookOpenAPIUse {
 						map.put("title",title );
 						map.put("url",url );
 						map.put("price",price );
-						//list에 추가
+						//list에 추가합니다.
 						list.add(map);
 					}
 				} catch (Exception e) {
