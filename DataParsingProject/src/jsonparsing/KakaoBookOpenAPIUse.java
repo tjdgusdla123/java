@@ -84,7 +84,7 @@ public class KakaoBookOpenAPIUse {
 			System.out.println(e.getMessage());
 			e.printStackTrace();
 		}
-		// 3.페이지 개수 구하기
+		// 3.페이지 개수 구하기.
 		// 페이지 당 출력할 개수를 설정
 		int perPage = 50;
 		// 페이지 개수를 계산 : 전체데이터 개수 (total_count)와 페이지당 출력개수 (perPahe)를 이용
